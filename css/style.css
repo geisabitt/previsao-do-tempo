@@ -1,6 +1,7 @@
 :root{
     --primary-color:#0080cd;
     --secondary-color:#004983;
+    --base-color:#F2F2F2;
     --padding-size: 1rem;
 }
 
@@ -34,7 +35,34 @@ header div{
     justify-content: end;
     align-items: center;
 }
+.display-city img{
+    padding: .1rem;
+    margin: .1rem;
+    width: 2rem;
+}
+
 .day-container{
     display: flex;
     flex-wrap: wrap;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--base-color);
+    border-radius: .2rem;
+}
+
+.date, .description{
+    width: 100%;
+    padding: var(--padding-size);
+    text-align: center;
+}
+
+.date{
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: var(--base-color);
+}
+
+.temp, img{
+    padding: var(--padding-size);
 }

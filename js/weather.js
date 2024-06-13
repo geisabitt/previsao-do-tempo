@@ -1,31 +1,8 @@
-//import fetch from 'node-fetch';
-
+import { createP, createImg, displayCity } from "./createElements.js"
 export const container = document.querySelector('#weather-forecast')
 export const containerCity = document.querySelector('#display-city')
 
 export const baseUrl = 'http://127.0.0.1:5500/'
-
-export function createP(text){
-  const P = document.createElement('p')
-  P.textContent = text
-  return P
-}
-export function createImg(urlImg){
-  const img = document.createElement('img')
-  img.src = `${baseUrl}/icons/${urlImg}.png`
-  return img
-}
-
-export function displayCity(city, icon){
-  const div = document.createElement('div');
-  div.className = 'display-city';
-  const createCity = createP(city)
-  const createIcon = createImg(icon)
-  div.appendChild(createCity)
-  div.appendChild(createIcon)
-
-  return div
-}
 
 export async function getWeatherForecast(){
   try {
@@ -35,16 +12,19 @@ export async function getWeatherForecast(){
       }
       const data = await response.json();
       
-      const renderCity = displayCity(data.resolvedAddress, data.currentConditions.icon);
+      const renderCity = displayCity(data.resolvedAddress, baseUrl, data.currentConditions.icon);
       containerCity.appendChild(renderCity);
+
+      
       
       const createDay = data.days.map(day =>{
           const div = document.createElement('div');
+          const formatDay = day.datetime.split('-')[2];
           div.className = 'day-container';
-          const date = createP(day.datetime);
-          const img = createImg(day.icon);
-          const description = createP(day.description);
-          const temp = createP(day.temp);
+          const date = createP(`Previsão para o dia ${formatDay}`,'date');
+          const img = createImg(baseUrl, day.icon);
+          const temp = createP(`${day.temp}°`,'temp');
+          const description = createP(day.description,'description');
     
           div.appendChild(date)
           div.appendChild(img)
@@ -53,10 +33,10 @@ export async function getWeatherForecast(){
     
           return div
       })
-    
-      createDay.forEach(dayDiv => container.appendChild(dayDiv));
+      return createDay.forEach(dayDiv => container.appendChild(dayDiv));
   } catch (error) {
-      console.error(error.message);
+    console.error(error.message);
+    throw error;
   }
 }
   getWeatherForecast();
