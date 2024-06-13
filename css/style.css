@@ -1,0 +1,40 @@
+:root{
+    --primary-color:#0080cd;
+    --secondary-color:#004983;
+    --padding-size: 1rem;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: #FFFFFF;
+}
+    
+header h1{
+    width: 100%;
+    padding: var(--padding-size);
+    background-color: var(--primary-color);
+}
+        
+header div{
+    width: 100%;
+    background-color: var(--secondary-color);
+}
+
+.display-city{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.day-container{
+    display: flex;
+    flex-wrap: wrap;
+}
